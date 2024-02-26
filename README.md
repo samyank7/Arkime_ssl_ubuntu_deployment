@@ -1,17 +1,24 @@
 # Arkime_ssl_ubuntu_deployment
 Step-by-step guide for deploying Arkime with SSL on Ubuntu, ensuring secure network traffic monitoring and analysis. Includes detailed instructions and configuration setups.
 
-# Deploy Arkime on Ubuntu  with SSL
+
 
 ## What is Arkime?
 __Arkime__, formerly known as Moloch, is a large-scale, open-source, indexed packet capture and search tool designed to store and index network traffic in standard PCAP format. Arkime is accessed through a web interface or API and supports encrypting PCAP files at rest. 
+More info on https://arkime.com/
 
 __This is how the interface looks like:__
-![Arkime](https://github.com/samyank7/Arkime_ssl_ubuntu_deployment/assets/70804565/a88eee79-5eb7-49e5-bf2b-1ca216300d9b)
+![Step27](https://github.com/samyank7/Arkime_ssl_ubuntu_deployment/assets/70804565/e5e49998-ba82-4d1c-849c-176b6ae05399)
 
 
+## DEMO 
+This is the official Demo from Arkime :
+__The username and password are both__ - `arkime`
+__Warning: Anyone can see anything you upload.__
 
-
+```bash
+https://demo.arkime.com/auth
+```
 ## Requirements
 
 Ubuntu 22.04 Desktop/server with 2GB RAM and 2 CPUs set up [minimum]
@@ -26,13 +33,15 @@ Source: https://arkime.com/downloads
 ```bash
  wget https://s3.amazonaws.com/files.molo.ch/builds/ubuntu-22.04/arkime_5.0.0-1_amd64.deb
 ``` 
+![Step1](https://github.com/samyank7/Arkime_ssl_ubuntu_deployment/assets/70804565/98779583-4516-452a-8ba2-4ee2f06d0022)
 
 ### Step 2: Installing Arkime
 
 ```bash
  sudo apt install ./arkime_5.0.0-1_amd64.deb 
+```
+![Step2(1)](https://github.com/samyank7/Arkime_ssl_ubuntu_deployment/assets/70804565/c3ea99f3-18dc-4f80-b19c-e968c6ee9fb0)
 
-``` 
 Visit the "opt" directory and verify whether the "arkime" folder exists there.
 
 ```bash
@@ -40,7 +49,9 @@ Visit the "opt" directory and verify whether the "arkime" folder exists there.
 ```
 ```bash
  ls
-``` 
+```
+![Step2(2)](https://github.com/samyank7/Arkime_ssl_ubuntu_deployment/assets/70804565/d6ce2482-3beb-4af7-ad2a-3a4dc83d2432)
+
 
 ### Step 3: Installing Elasticsearch
 
@@ -52,10 +63,14 @@ echo "deb [signed-by=/usr/share/keyrings/elastic.gpg] https://artifacts.elastic.
 ``` 
 ```bash
 sudo apt update
-``` 
+```
+![Step3(1)](https://github.com/samyank7/Arkime_ssl_ubuntu_deployment/assets/70804565/f9d6fd4d-4c1f-40cb-b889-76160bb1bc19)
+
 ```bash
 sudo apt install elasticsearch  
-``` 
+```
+![Step3(2)](https://github.com/samyank7/Arkime_ssl_ubuntu_deployment/assets/70804565/23de8ce4-57ae-4fa6-8e46-435a09f2f337)
+
 
 ### Step 4: Configuring elasticsearch
 
@@ -67,7 +82,9 @@ In this file uncomment and edit the field
 ```bash
 network.host :<localhost or domain name>
 ```
-After making changes type the following commands to start elasticsearch and check the status
+![Step4(1)](https://github.com/samyank7/Arkime_ssl_ubuntu_deployment/assets/70804565/a0f97a41-1907-4db9-ab95-9598d3773133)
+
+After making changes exit and  type the following commands to start elasticsearch and check the status
 ```bash
 sudo systemctl start elasticsearch
 ``` 
@@ -77,6 +94,8 @@ sudo systemctl enable elasticsearch
 ```bash
 sudo systemctl status elasticsearch
 ```
+![Step4(2)](https://github.com/samyank7/Arkime_ssl_ubuntu_deployment/assets/70804565/53d02328-d1bc-459d-803d-cfb73a973e67)
+
 
 ### Step 5:  Updating firewall regulations and verifying the operational status of Elasticsearch.
 ```bash
@@ -93,11 +112,14 @@ sudo ufw reload
 ```bash
 sudo ufw status
 ```
+![Step5(1)](https://github.com/samyank7/Arkime_ssl_ubuntu_deployment/assets/70804565/b600473f-899b-4b08-987d-43b9f13367e6)
 
 Testing Elastic search
 ```bash
 curl -X GET 'http://localhost:9200'
 ```
+![Step5(2)](https://github.com/samyank7/Arkime_ssl_ubuntu_deployment/assets/70804565/c059f3e8-04dd-4b83-bc87-1632d90a1df9)
+
 
 ### Step 6: SSL configuration for publicly available domain
 
@@ -258,6 +280,11 @@ Enable Apache SSL Module:
 ```bash
 sudo a2enmod ssl
 ```
+```bash
+sudo systemctl restart apache2
+```
+![Step6(2) png](https://github.com/samyank7/Arkime_ssl_ubuntu_deployment/assets/70804565/d9020f44-2f14-4eaa-ab5f-a2d7df7f6400)
+
 Edit the default SSL configuration file:
 ```bash
 sudo nano /etc/apache2/sites-available/default-ssl.conf
@@ -267,6 +294,8 @@ Add the following lines to specify the SSL certificate and key file paths:
 SSLCertificateFile /etc/ssl/certs/localhost.pem
 SSLCertificateKeyFile /etc/ssl/private/localhost-key.pem
 ```
+![Step6(3) png](https://github.com/samyank7/Arkime_ssl_ubuntu_deployment/assets/70804565/8f7ebd82-954a-48e2-8077-dd65bba310fc)
+
 Allow Traffic in Firewall:
 ```bash
 sudo ufw allow in "Apache Full"
@@ -284,6 +313,7 @@ sudo systemctl restart apache2
 ```
 
 #### Now your localhost server should be accessible over HTTPS. You can access it in your browser using https://localhost.
+![Step6(4) png](https://github.com/samyank7/Arkime_ssl_ubuntu_deployment/assets/70804565/54906c57-cae4-4b0d-8575-ad5fb249e17c)
 
 
 ### Step 8: Configuring Arkime
@@ -463,6 +493,8 @@ certFile= /etc/ssl/certs/localhost.pem
 # Private key file to use, comment out to use http instead
 keyFile= /etc/ssl/private/localhost-key.pem
 ```
+![Step23](https://github.com/samyank7/Arkime_ssl_ubuntu_deployment/assets/70804565/7a6f3903-d47f-4b6b-a802-c45382a5b968)
+
 
 ### Step 10: Final Configurations and  check https for arkime
 
@@ -485,6 +517,7 @@ For our case it is :
 ```bash
 https://localhost:8005
 ```
+![Step25](https://github.com/samyank7/Arkime_ssl_ubuntu_deployment/assets/70804565/015c385b-9393-41b4-9abb-055787390dc8)
 
 
 ### Step 11 :[Optional]Activating the upload button within the Arkime interface.
@@ -502,6 +535,8 @@ spiDataMaxIndices=4
 # Uncomment the following to allow direct uploads. This is experimental
 uploadCommand=/opt/arkime/bin/capture --copy -n {NODE} -r {TMPFILE} -c {CONFIG} {TAGS}
 ```
+![Step24](https://github.com/samyank7/Arkime_ssl_ubuntu_deployment/assets/70804565/ba98aef3-650a-489d-a772-811f924a2900)
+
 
 then restart capture and viewer services: 
 ```bash
@@ -511,6 +546,7 @@ sudo systemctl restart arkimecapture.service
 ```bash
 sudo systemctl restart arkimeviewer.service
 ```
+![Arkime](https://github.com/samyank7/Arkime_ssl_ubuntu_deployment/assets/70804565/cd9f65ba-b24f-4174-abc2-dc84d099cf33)
 
 
 
