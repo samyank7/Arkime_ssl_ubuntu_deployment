@@ -6,7 +6,7 @@ Step-by-step guide for deploying Arkime with SSL on Ubuntu, ensuring secure netw
 ## What is Arkime?
 __Arkime__, formerly known as Moloch, is a large-scale, open-source, indexed packet capture and search tool designed to store and index network traffic in standard PCAP format. Arkime is accessed through a web interface or API and supports encrypting PCAP files at rest. 
 
-This is how the interface looks like:
+__This is how the interface looks like:__
 ![Arkime](https://github.com/samyank7/Arkime_ssl_ubuntu_deployment/assets/70804565/a88eee79-5eb7-49e5-bf2b-1ca216300d9b)
 
 
