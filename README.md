@@ -1,6 +1,8 @@
 # Arkime_ssl_ubuntu_deployment
 Step-by-step guide for deploying Arkime with SSL on Ubuntu, ensuring secure network traffic monitoring and analysis. Includes detailed instructions and configuration setups.
 
+# Deploy Arkime on Ubuntu  with SSL
+
 __Arkime__, formerly known as Moloch, is a large-scale, open-source, indexed packet capture and search tool designed to store and index network traffic in standard PCAP format. Arkime is accessed through a web interface or API and supports encrypting PCAP files at rest. 
 
 
@@ -38,11 +40,14 @@ Visit the "opt" directory and verify whether the "arkime" folder exists there.
 
 ```bash
 curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elastic.gpg
-
+``` 
+```bash
 echo "deb [signed-by=/usr/share/keyrings/elastic.gpg] https://artifacts.elastic.co/packages/7.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-7.x.list
-
+``` 
+```bash
 sudo apt update
-
+``` 
+```bash
 sudo apt install elasticsearch  
 ``` 
 
@@ -59,20 +64,27 @@ network.host :<localhost or domain name>
 After making changes type the following commands to start elasticsearch and check the status
 ```bash
 sudo systemctl start elasticsearch
-
+``` 
+```bash
 sudo systemctl enable elasticsearch
-
+``` 
+```bash
 sudo systemctl status elasticsearch
 ```
 
 ### Step 5:  Updating firewall regulations and verifying the operational status of Elasticsearch.
 ```bash
 sudo ufw allow 9200
-
+```
+```bash
 sudo ufw start
+```
 
+```bash
 sudo ufw reload
+```
 
+```bash
 sudo ufw status
 ```
 
@@ -87,7 +99,9 @@ __Skip this step if you are setting  up arkime on localhost__
 
 ```bash
 sudo apt install certbot python3-certbot-apache 
+```
 
+```bash
 certbot --version
 ```
 Navigate to /etc/apache2/sites-available directory and run the following command to create a configuration file for your installation:
@@ -217,13 +231,21 @@ You can install these tools using the following commands:
 Generate SSL Certificate:
 ```bash
 sudo apt install libnss3-tools
+```
+```bash
 sudo mkcert -install
+```
+```bash
 sudo mkcert localhost
 ```
 Move Certificate Files:
 ```bash
 sudo mkdir -p /etc/ssl/certs /etc/ssl/private
+```
+```bash
 sudo mv localhost.pem /etc/ssl/certs/
+```
+```bash
 sudo mv localhost-key.pem /etc/ssl/private/
 ```
 Enable Apache SSL Module:
@@ -246,6 +268,8 @@ sudo ufw allow in "Apache Full"
 Enable Apache Headers Module and SSL:
 ```bash
 sudo a2enmod headers
+```
+```bash
 sudo a2ensite default-ssl
 ```
 Restart Apache:
@@ -310,33 +334,42 @@ Note - This will start capture service on your host.
 Intialize Capture service
 ```bash
 cd opt/arkime/bin
-
+```
+```bash
 sudo ./arkime_update_geo.sh
-
+```
+```bash
 sudo ./capture
 ```
 Add the ufw rules:
 ```bash
 sudo ufw allow 8005
+```
+```bash
 sudo ufw reload
 ```
 
 Starting the capture and viewer service:
 ```bash
 systemctl start arkimecapture.service
+```
+```bash
 systemctl start arkimeviewer.service
 ```
 
 After this the website should be up and running at :
 ```bash
 http:<domainname>:8005
+
 For us it is : http://localhost:8005
 ```
-Simply login with the credentials entered this step
+Simply login with the credentials entered in this step.
+
+__If you have skipped setting up SSL, your arkime instance is ready__
 
 ### Step 9: Activating SSL for Arkime  
 
-__If you have activated your ssl on your publicliy available domain using certbot follow this:__ 
+__If you have activated your SSL on your publicliy available domain using certbot follow this:__ 
 
 [replace the last name with your domain name entered while configuring ssl]
 
@@ -383,7 +416,7 @@ keyFile= /etc/letsencrypt/live/<your domain>/privkey.pem
 
 ```
 
-__If you have activated your ssl for localhost using mkcert follow this:__ 
+__If you have activated your SSL for localhost using mkcert follow this:__ 
 
 
 we need path for these two certificates: cert.pem and privkey.pem 
@@ -429,7 +462,11 @@ keyFile= /etc/ssl/private/localhost-key.pem
 
 ```bash
 sudo systemctl daemon-reload
+```
+```bash
 sudo systemctl restart arkimeviewer.service
+```
+```bash
 sudo systemctl restart arkimeviewer.service
 ```
 
@@ -463,6 +500,9 @@ uploadCommand=/opt/arkime/bin/capture --copy -n {NODE} -r {TMPFILE} -c {CONFIG} 
 then restart capture and viewer services: 
 ```bash
 sudo systemctl restart arkimecapture.service
+```
+
+```bash
 sudo systemctl restart arkimeviewer.service
 ```
 
