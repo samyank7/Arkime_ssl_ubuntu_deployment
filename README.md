@@ -1,18 +1,15 @@
 # Arkime_ssl_ubuntu_deployment
-Step-by-step guide for deploying Arkime with SSL on Ubuntu, ensuring secure network traffic monitoring and analysis. Includes detailed instructions and configuration setups.
+This is a step-by-step guide for deploying Arkime with SSL on Ubuntu, ensuring secure network traffic monitoring and analysis. Includes detailed instructions and configuration steps.
 
 
 
 ## What is Arkime?
-__Arkime__, formerly known as Moloch, is a large-scale, open-source, indexed packet capture and search tool designed to store and index network traffic in standard PCAP format. Arkime is accessed through a web interface or API and supports encrypting PCAP files at rest. 
+__Arkime__, formerly known as Moloch, is a large-scale, open-source, indexed packet capture and search tool designed to store and index network traffic in standard PCAP format. Arkime is accessed through a web interface or API and supports encrypting PCAP files at rest. It offers a web interface for browsing, searching, and exporting PCAP data. Arkime uses Node.js for the viewer component and requires specific packages compiled with the same Node.js version. The system consists of components like capture, viewer, OpenSearch/Elasticsearch, and optional applications like cont3xt, esProxy, Parliament, and wiseService. Arkime is designed to be deployed across multiple systems and can scale to handle high traffic volumes. It supports full packet captures for optimal performance. 
+
 More info on https://arkime.com/
 
-__This is how the interface looks like:__
-![Step27](https://github.com/samyank7/Arkime_ssl_ubuntu_deployment/assets/70804565/e5e49998-ba82-4d1c-849c-176b6ae05399)
-
-
 ## DEMO 
-This is the official Demo from Arkime :
+__This is the official Demo from Arkime.__
 
 __The username and password are both__ : `arkime`
 
