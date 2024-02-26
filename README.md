@@ -13,12 +13,17 @@ __This is how the interface looks like:__
 
 ## DEMO 
 This is the official Demo from Arkime :
-__The username and password are both__ - `arkime`
+
+__The username and password are both__ : `arkime`
+
 __Warning: Anyone can see anything you upload.__
 
-```bash
 https://demo.arkime.com/auth
-```
+
+![Step28](https://github.com/samyank7/Arkime_ssl_ubuntu_deployment/assets/70804565/6a890aaa-e7da-4451-985f-3e85a1bc5015)
+
+
+
 ## Requirements
 
 Ubuntu 22.04 Desktop/server with 2GB RAM and 2 CPUs set up [minimum]
@@ -312,7 +317,7 @@ Restart Apache:
 sudo systemctl restart apache2
 ```
 
-#### Now your localhost server should be accessible over HTTPS. You can access it in your browser using https://localhost.
+#### Now your localhost server should be accessible over HTTPS. You can access it in your browser using https://localhost
 ![Step6(4) png](https://github.com/samyank7/Arkime_ssl_ubuntu_deployment/assets/70804565/54906c57-cae4-4b0d-8575-ad5fb249e17c)
 
 
@@ -337,6 +342,7 @@ Install Elasticsearch server locally for demo, must have at least 3G of memory, 
 ```
 
 Set Elasticsearch server URL, localhost:9200 in this setup. 
+
 If not on localhost instead of Enter , type http://your-domain.com>:9200
 
 ```bash
@@ -401,7 +407,7 @@ For us it is : http://localhost:8005
 ```
 Simply login with the credentials entered in this step.
 
-__If you have skipped setting up SSL, your arkime instance is ready__
+__If you have skipped setting up SSL, your arkime instance is ready.__
 
 ### Step 9: Activating SSL for Arkime  
 
@@ -565,5 +571,5 @@ SSL for publicliy available domain: https://www.linuxtuto.com/how-to-install-apa
 
 SSL for Localhost: https://www.arubacloud.com/tutorial/how-to-enable-https-protocol-with-apache-2-on-ubuntu-20-04.aspx
 
-You can use this script to upload files via command line. It also clears all previous stored data. : 
+You can use this script to upload files via command line. It also clears all previously stored data. : 
 https://gist.github.com/jstrosch/63910bdf7117f8f53a26227cfd56b6c6
