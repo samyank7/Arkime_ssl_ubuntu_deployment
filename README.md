@@ -5,7 +5,6 @@ Step-by-step guide for deploying Arkime with SSL on Ubuntu, ensuring secure netw
 
 __Arkime__, formerly known as Moloch, is a large-scale, open-source, indexed packet capture and search tool designed to store and index network traffic in standard PCAP format. Arkime is accessed through a web interface or API and supports encrypting PCAP files at rest. 
 
-
 ## Requirements
 
 Ubuntu 22.04 Desktop/server with 2GB RAM and 2 CPUs set up [minimum]
@@ -523,6 +522,5 @@ SSL for publicliy available domain: https://www.linuxtuto.com/how-to-install-apa
 
 SSL for Localhost: https://www.arubacloud.com/tutorial/how-to-enable-https-protocol-with-apache-2-on-ubuntu-20-04.aspx
 
-
-You use this script to upload files via command line. It also clears all previous stored data. : 
+You can use this script to upload files via command line. It also clears all previous stored data. : 
 https://gist.github.com/jstrosch/63910bdf7117f8f53a26227cfd56b6c6
